@@ -60,3 +60,6 @@ void print(vector<int> const &input)
     cout <<  "]" << endl;
 }
 
+//TODO: Create the to csv function
+//TODO: Create the algorithm function
+
