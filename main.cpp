@@ -8,6 +8,8 @@
 #include <ratio>
 #include <chrono>
 #include <tuple>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 using namespace std::chrono;
@@ -15,24 +17,61 @@ using namespace std::chrono;
 vector<int>Rand(int length, int range);
 tuple<long,long,float>BruteForceMedian(vector<int>A);
 void print(vector<int> const &input);
+double inputCSV(int maxLen, int minLen, int range, int amountSims, int stepSize);
+void print2D(vector<vector<int>> const &input);
 
-int main()
+int main(int argc, char* argv[])
 {
-    int range = 100;
-    int length = 20;
-    vector<int>randArray;
 
+//    int range = 100;
+//    int length = 20;
+//    vector<int>randArray;
+//
+//    randArray = Rand(length, range);
+//
+//    auto [median, basicOp, timeTaken] = BruteForceMedian(randArray);
+//
+//    cout << "This is the random array" << endl;
+//    print(randArray);
+//    cout << "This is the output" << endl;
+//    cout << median << ',' << basicOp << ',' << timeTaken << endl;
 
-    randArray = Rand(length, range);
+    double output = inputCSV(100, 10, 300, 10, 10);
 
-    auto [median, basicOp, timeTaken] = BruteForceMedian(randArray);
-
-    cout << "This is the random array" << endl;
-    print(randArray);
-    cout << "This is the output" << endl;
-    cout << median << ',' << basicOp << ',' << timeTaken << endl;
+    cout << "amount of total sims: " << output << endl;
 
     return 0;
+}
+
+// inputCSV
+// INPUTS:
+// totalSims = (maxLen/stepSize)*amountSims
+// amountSims = amount of simulations on each step size
+// maxLen - the length of the array
+// range - the range of the random values in the array
+// sims - # of simulations
+// minLen - The minimum length of an array
+double inputCSV(int maxLen, int minLen, int range, int amountSims, int stepSize){
+    // This is going to be the input array which is streamed to a .csv file
+    vector<vector<int>> inputArray;
+    ofstream output;
+    output.open("input.csv");
+    int totalSims = (maxLen/stepSize) * amountSims;
+    int arrayLen = minLen;
+
+    for (int i = 0; i < amountSims; i++)
+    {
+        for (int j = 0; j < stepSize; j++)
+        {
+            inputArray.push_back(Rand(arrayLen, range));
+        }
+        minLen+=stepSize;
+    }
+
+    print2D(inputArray);
+
+    output.close();
+    return totalSims;
 }
 
 
@@ -97,6 +136,20 @@ tuple<long,long, float> BruteForceMedian(vector<int> A)
     return tuple<long, long, float>();
 }
 
+void print2D(vector<vector<int>> const &input)
+{
+    // Auto in this case is used to cut down on writing vector each time
+    // Auto is implemented when the program is built
+    // It sets the input value automatically to a vector value
+    // TODO: Need to research this.
+    for (auto &row: input)
+    {
+        for (auto col: row) {
+            cout << col << endl;
+        }
+    }
+}
+
 
 
 void print(vector<int> const &input)
@@ -108,11 +161,11 @@ void print(vector<int> const &input)
     // TODO: Need to research this.
     for (auto v: input)
     {
-        cout << v << ",";
+        cout << v << endl;
     }
     cout <<  "]" << endl;
 }
 
 //TODO: Create the to csv function
-//TODO: Create the algorithm function
+
 
