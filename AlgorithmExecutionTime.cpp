@@ -14,9 +14,8 @@ tuple<long, long, float> BruteForceMedianTime(vector<int> A);
 
 tuple<long, long, float> BruteForceMedianTime(vector<int> A)
 {
-    int n = A.size();
-    int k = ceil(n/2.0);
-    int basicOp = 0;
+    float n = A.size();
+    double k = ceil(n/2.0);
     tuple<long,long> outputArray;
     duration<double> timeTaken;
 

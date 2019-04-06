@@ -11,8 +11,8 @@ tuple<long,long,long> BruteForceMedianOperations(vector<int> A);
 
 tuple<long,long,long> BruteForceMedianOperations(vector<int> A)
 {
-    int n = A.size();
-    int k = ceil(n/2.0);
+    float n = A.size();
+    double k = ceil(n/2.0);
     int basicOp = 0;
     tuple<long,long> outputArray;
 

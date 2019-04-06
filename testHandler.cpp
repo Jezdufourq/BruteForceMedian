@@ -77,18 +77,18 @@ void testEvenArray() {
     printOutput(evenTestOperations, evenTestExecutionTime, 1);
 
     // Printing the results of the comparison
-    long oddSolutions[] = {5, 2, 32};
+    long evenSolutions[] = {5, 2, 32};
     vector<string> testOutcome;
     // Compare the test results with what we expect
     cout << "\n=======EVEN TEST : Test results=======" << endl;
     for (int i = 0; i < evenTestOperations.size(); i++) {
-        if (get<1>(evenTestOperations[i]) == oddSolutions[i]) {
+        if (get<1>(evenTestOperations[i]) == evenSolutions[i]) {
             testOutcome.emplace_back("PASSED");
         } else {
             testOutcome.emplace_back("FAILED");
         }
     }
-    printResults(evenTestOperations,oddSolutions, testOutcome);
+    printResults(evenTestOperations,evenSolutions, testOutcome);
 }
 
 void testOneLenArray()
@@ -236,17 +236,4 @@ void testLargeSizeArray(int arraySize)
     cout << "\n=======LARGE ARRAY SIZE TEST : Output values=======" << endl;
     printOutput(largeTestOperations, largeTestExecutionTime, 1);
 
-    // Printing the results of the comparison
-//    long medianSolutions[] = {6, 0, 1, -1, 0};
-//    vector<string> testOutcome;
-//    // Compare the test results with what we expect
-//    cout << "\n=======MEDIAN TEST : Test results=======" << endl;
-//    for (int i = 0; i < largeTestOperations.size(); i++) {
-//        if (get<1>(largeTestOperations[i]) == medianSolutions[i]) {
-//            testOutcome.emplace_back("PASSED");
-//        } else {
-//            testOutcome.emplace_back("FAILED");
-//        }
-//    }
-//    printResults(largeTestOperations,medianSolutions, testOutcome);
 }
