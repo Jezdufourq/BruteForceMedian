@@ -10,23 +10,23 @@
 using namespace std;
 using namespace std::chrono;
 
-tuple<long, float> BruteForceMedianTime(vector<int> A);
+tuple<long, long, float> BruteForceMedianTime(vector<int> A);
 
-tuple<long, float> BruteForceMedianTime(vector<int> A)
+tuple<long, long, float> BruteForceMedianTime(vector<int> A)
 {
     int n = A.size();
     int k = ceil(n/2.0);
     int basicOp = 0;
-    tuple<int,int> outputArray;
+    tuple<long,long> outputArray;
     duration<double> timeTaken;
 
-    for (int i = 0; i < (n - 1); i++ )
+    for (int i = 0; i <= (n - 1); i++ )
     {
         auto startTime = chrono::high_resolution_clock::now();
         long numSmaller = 0;
         long numEqual = 0;
 
-        for(int j = 0; j < (n - 1); j++)
+        for(int j = 0; j <= (n - 1); j++)
         {
             if (A[j] < A[i])
             {
@@ -45,8 +45,8 @@ tuple<long, float> BruteForceMedianTime(vector<int> A)
             auto endTime = chrono::high_resolution_clock::now();
             timeTaken = duration_cast<duration<double>>(endTime - startTime);
 
-            return make_tuple(A[i], timeTaken.count());
+            return make_tuple(A.size(), A[i], timeTaken.count());
         }
     }
-    return tuple<long, float>();
+    return tuple<long, long, float>();
 }
