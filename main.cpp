@@ -21,67 +21,64 @@
 
 using namespace std;
 using namespace std::chrono;
-typedef vector <tuple<long, long>>operationTuples;
 
-operationTuples test1;
-enum testCase{TESTING=0, EXECUTION_TIME=1, OPERATION_COUNT=2};
+//enum testCase{TESTING=0, EXECUTION_TIME=1, OPERATION_COUNT=2};
 
 
 int main(int argc, char* argv[])
 {
-    testOddArray();
-    cout << setw(80) << setfill('=') << "\n";
-    cout << setw(80) << setfill('=') << "\n" << endl;
-    testEvenArray();
-    cout << setw(80) << setfill('=') << "\n";
-    cout << setw(80) << setfill('=') << "\n" << endl;
-    testOneLenArray();
-    cout << setw(80) << setfill('=') << "\n";
-    cout << setw(80) << setfill('=') << "\n" << endl;
-    testRandArray(10,100);
+    int userInput;
+    cout << "=======WELCOME!=============" << endl;
+    cout << "Enter the program that you would like to run" << endl;
+    cout << "TESTING=0, EXECUTION_TIME=1, OPERATION_COUNT=2" << endl;
+    cin >> userInput;
 
+    switch(userInput)
+    {
+        case 0:
+        {
+            // Needs to include the following tests:
+            // odd array
+            // even array
+            // test median
+            // array length 1
+            int largeSize = 1000;
+            cout << "=======TEST 1 : Odd Array=======" << endl;
+            testOddArray();
+            cout << "================================\n" << endl;
 
-//    int userInput;
-//    cout << "=======WELCOME!=============" << endl;
-//    cout << "Enter the program that you would like to run" << endl;
-//    cout << "TESTING=0, EXECUTION_TIME=1, OPERATION_COUNT=2" << endl;
-//    cin >> userInput;
-//
-//    switch(userInput)
-//    {
-//        case TESTING:
-//        {
-//            // Needs to include the following tests:
-//            // odd array
-//            // even array
-//            // test median
-//            // array length 1
-//
-//            cout << "=======TEST 1 : Odd Array=======" << endl;
-//            testOddArray();
-//
-//            cout << "=======TEST 2 : Even Array=======" << endl;
-//            testEvenArray();
-//
-//            cout << "=======TEST 3 : Array Length One Array=======" << endl;
-//            testOneLenArray();
-//
-//            cout << "=======TEST 4 : Large Input Array Size=======" << endl;
-//            testLargeSizeArray();
-//        }
-//        case EXECUTION_TIME:
-//        {
-//
-//        }
-//        case OPERATION_COUNT:
-//        {
-//
-//        }
-//        default:
-//        {
-//            return -1;
-//        }
-//    }
+            cout << "=============TEST 2 : Even Array============" << endl;
+            testEvenArray();
+            cout << "=============================================\n" << endl;
 
+            cout << "==========TEST 3 : Array Length One Array============" << endl;
+            testOneLenArray();
+            cout << "=====================================================\n" << endl;
 
+            cout << "=======TEST 4 : Large Input Array Size of 1000=======" << endl;
+            testLargeSizeArray(largeSize);
+            cout << "=====================================================\n" << endl;
+        }
+        case 1:
+        {
+            // Tests which need to be included
+            int choice = 2;
+            cout << "=======TEST 1 : Random array of 100 simulations=======" << endl;
+            cout << "===========TEST 1 : EXECUTION TIME TEST===============" << endl;
+            testRandArray(10,100,choice);
+            cout << "======================================================\n" << endl;
+        }
+        case 2:
+        {
+            int choice = 3;
+            cout << "=======TEST 1 : Random array of 100 simulations=======" << endl;
+            cout << "===========TEST 1 : OPERATION COUNT TEST==============" << endl;
+            testRandArray(10,100,choice);
+            cout << "======================================================\n" << endl;
+        }
+        default:
+        {
+            return -1;
+        }
+    }
 }

@@ -6,12 +6,6 @@ typedef vector<tuple<long, long, float>> MedianTimeVector;
 #include <iomanip>
 using namespace std;
 
-void testOddArray();
-void testEvenArray();
-void testOneLenArray();
-void testRandArray();
-void testMedianArray();
-void testLargeSizeArray();
 
 void testOddArray() {
     // Creating the data
@@ -38,7 +32,7 @@ void testOddArray() {
     cout << "=======ODD TEST : Input values=======" << endl;
     print2D(oddData);
     cout << "\n=======ODD TEST : Output values=======" << endl;
-    printOutput(oddTestOperations, oddTestExecutionTime);
+    printOutput(oddTestOperations, oddTestExecutionTime, 1);
 
     // Printing the results of the comparison
     long oddSolutions[] = {4, 2, 87};
@@ -80,7 +74,7 @@ void testEvenArray() {
     cout << "=======EVEN TEST : Input values=======" << endl;
     print2D(evenData);
     cout << "\n=======EVEN TEST : Output values=======" << endl;
-    printOutput(evenTestOperations, evenTestExecutionTime);
+    printOutput(evenTestOperations, evenTestExecutionTime, 1);
 
     // Printing the results of the comparison
     long oddSolutions[] = {5, 2, 32};
@@ -123,7 +117,7 @@ void testOneLenArray()
     cout << "=======ONE LENGTH TEST : Input values=======" << endl;
     print2D(onelenData);
     cout << "\n=======ONE LENGTH TEST : Output values=======" << endl;
-    printOutput(onelenTestOperations, onelenTestExecutionTime);
+    printOutput(onelenTestOperations, onelenTestExecutionTime, 1);
 
     // Printing the results of the comparison
     long oddSolutions[] = {1, 1000, -300};
@@ -140,7 +134,7 @@ void testOneLenArray()
     printResults(onelenTestOperations,oddSolutions, testOutcome);
 }
 
-void testRandArray(int numArray,int numSims)
+void testRandArray(int numArray,int numSims,int choice)
 {
     // Creating the data
     vector<vector<vector<int>>> randData;
@@ -169,22 +163,90 @@ void testRandArray(int numArray,int numSims)
     cout << "=======RANDOM ARRAY TEST : Input values=======" << endl;
     print3D(randData);
     cout << "\n=======RANDOM ARRAY TEST : Output values=======" << endl;
-    printOutput(randTestOperations, randTestExecutionTime);
-//
-//    // Printing the results of the comparison
-//    long oddSolutions[] = {1, 1000, -300};
-//
+    printOutput(randTestOperations, randTestExecutionTime, choice);
+}
+
+void testMedianArray()
+{
+    // Creating the data
+    vector<vector<int>> medianData;
+    medianData = medianArray();
+
+    // Storing the data in a csv
+    string medianInputStr = "testMedianInput.csv";
+    createCsv2D(medianInputStr, medianData);
+
+    // Run the algorithms on the odd length array
+    MedianOperationsVector medianTestOperations;
+    MedianTimeVector medianTestExecutionTime;
+
+    for (auto &row : medianData) {
+        medianTestOperations.push_back(BruteForceMedianOperations(row));
+        medianTestExecutionTime.push_back(BruteForceMedianTime(row));
+    }
+    // Store the results in an output csv
+    string medianTestStr = "testMedianOutput.csv";
+    createCsvOutput(medianTestStr, medianTestOperations, medianTestExecutionTime);
+
+    // Print the results to the console
+    cout << "=======MEDIAN TEST : Input values=======" << endl;
+    print2D(medianData);
+    cout << "\n=======MEDIAN TEST : Output values=======" << endl;
+    printOutput(medianTestOperations, medianTestExecutionTime, 1);
+
+    // Printing the results of the comparison
+    long medianSolutions[] = {6, 0, 1, -1, 0};
+    vector<string> testOutcome;
+    // Compare the test results with what we expect
+    cout << "\n=======MEDIAN TEST : Test results=======" << endl;
+    for (int i = 0; i < medianTestOperations.size(); i++) {
+        if (get<1>(medianTestOperations[i]) == medianSolutions[i]) {
+            testOutcome.emplace_back("PASSED");
+        } else {
+            testOutcome.emplace_back("FAILED");
+        }
+    }
+    printResults(medianTestOperations,medianSolutions, testOutcome);
+}
+
+void testLargeSizeArray(int arraySize)
+{
+    // Creating the data
+    vector<int> largeData;
+    largeData = largeArray(arraySize);
+
+    // Storing the data in a csv
+    string largeInputStr = "testLargeInput.csv";
+    createCsv1D(largeInputStr, largeData);
+
+    // Run the algorithms on the odd length array
+    MedianOperationsVector largeTestOperations;
+    MedianTimeVector largeTestExecutionTime;
+
+    largeTestOperations.push_back(BruteForceMedianOperations(largeData));
+    largeTestExecutionTime.push_back(BruteForceMedianTime(largeData));
+
+    // Store the results in an output csv
+    string largeTestStr = "testLargeOutput.csv";
+    createCsvOutput(largeTestStr, largeTestOperations, largeTestExecutionTime);
+
+    // Print the results to the console
+    cout << "=======LARGE ARRAY SIZE TEST : Input values=======" << endl;
+    print(largeData);
+    cout << "\n=======LARGE ARRAY SIZE TEST : Output values=======" << endl;
+    printOutput(largeTestOperations, largeTestExecutionTime, 1);
+
+    // Printing the results of the comparison
+//    long medianSolutions[] = {6, 0, 1, -1, 0};
 //    vector<string> testOutcome;
 //    // Compare the test results with what we expect
-//    cout << "\n=======ONE LENGTH : Test results=======" << endl;
-//    for (int i = 0; i < randTestOperations.size(); i++) {
-//        if (get<1>(randTestOperations[i]) == oddSolutions[i]) {
+//    cout << "\n=======MEDIAN TEST : Test results=======" << endl;
+//    for (int i = 0; i < largeTestOperations.size(); i++) {
+//        if (get<1>(largeTestOperations[i]) == medianSolutions[i]) {
 //            testOutcome.emplace_back("PASSED");
 //        } else {
 //            testOutcome.emplace_back("FAILED");
 //        }
 //    }
-//    printResults(randTestOperations,oddSolutions, testOutcome);
+//    printResults(largeTestOperations,medianSolutions, testOutcome);
 }
-
-

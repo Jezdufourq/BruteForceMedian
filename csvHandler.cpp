@@ -4,15 +4,6 @@
 using namespace std;
 using namespace std::chrono;
 
-
-void createCsv3D(string &fileName, vector<vector<vector<int>>> const &input);
-void createCsv2D(string &fileName, vector<vector<int>> const &input);
-void createCsv1D(string &fileName, vector<int> const &input);
-void createCsvOutput(string &fileName, vector<tuple<long, long, long>> const &algoOp,
-                     vector<tuple<long, long, float>> const &algoTime);
-
-
-
 void createCsv3D(string &fileName, vector<vector<vector<int>>> const &input)
 {
     ofstream newFile;
