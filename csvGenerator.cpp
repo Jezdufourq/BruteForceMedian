@@ -1,32 +1,43 @@
 #include <iostream>
 #include <fstream>
-
 using namespace std;
 
-ofstream csvExporter;
-csvExporter.open("timings.csv");
-for (int k = TEST_TYPE::SORTED; k <= TEST_TYPE::RANDOMIZED; k++) {
-    switch(k) {
-        case TEST_TYPE::SORTED:
-            csvExporter << "SORTED,time" << std::endl;
+void createCsv(vector<vector<int>> const &input, TEST_TYPE testType)
+{
+    ofstream outputFile;
+    switch(testType)
+    {
+        case ODD:
+            outputFile.open("ODD_TEST_OUTPUT.csv");
             break;
-        case TEST_TYPE::REVERSED:
-            csvExporter << "REVERSED,time" << std::endl;
+        case EVEN:
+            outputFile.open("EVEN_TEST_OUTPUT.csv");
             break;
-        case TEST_TYPE::RANDOMIZED:
-            csvExporter << "RANDOMIZED,time" << std::endl;
+        case LARGE:
+            outputFile.open("LARGE_TEST_OUTPUT.csv");
             break;
-        default:break;
-}
-for (int i = 1; i <= 10000; i += (10000 * TEST_COUNT) / (255)) {
-    for (int j = 0; j < TEST_COUNT; j++) {
-        testVector = generateArray((unsigned long) i, (TEST_TYPE) k);
-        clock_t start = clock();
-        runMethod(testVector);
-        double duration = (std::clock() - start) / (CLOCKS_PER_SEC / 1000.0);
-        csvExporter << i << "," << duration << std::endl;
-            }
-        }
+        case ONELEN:
+            outputFile.open("ONELEN_TEST_OUTPUT.csv");
+            break;
+        case RANDOM:
+            outputFile.open("RAND_TEST_OUTPUT.csv");
+            break;
+        case REVERSED:
+            outputFile.open("REV_TEST_OUTPUT.csv");
+            break;
+        case SORTED:
+            outputFile.open("SORTED_TEST_OUTPUT.csv");
+            break;
     }
-csvExporter.close();
+    outputFile << "TestNumber, InputArray," << endl;
+    int i = 0;
+    for (auto &row: input) {
+        outputFile << i << ",";
+        for (auto &col: row) {
+            outputFile << col << ",";
+        }
+        outputFile << "," << endl;
+        i++;
+    }
+    outputFile.close();
 }

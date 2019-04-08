@@ -4,6 +4,8 @@ using namespace std;
 vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
     vector<vector<int>> outputArray;
     vector<int> innerArray;
+    unsigned int Count = 0;
+    int random;
 
     switch (type) {
         case ODD:
@@ -51,14 +53,12 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
             }
             break;
         case RANDOM:
-            unsigned int randCount = 0;
-            int random;
             for(int i = 0; i < (numSims + 1); i++)
             {
-                randCount+=ARRAY_STEP_SIZE;
+                Count+=ARRAY_STEP_SIZE;
                 for(int j = 0;j < ARRAY_NUM_SIMS; j++)
                 {
-                    for (int k = 0; k < randCount; k++)
+                    for (int k = 0; k < Count; k++)
                     {
                         random = rand() % RANDOM_RANGE;
                         innerArray[k] = random;
@@ -68,28 +68,26 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
             }
             break;
         case REVERSED:
-            unsigned int revCount = 0;
             for(int i = 0; i < (numSims + 1); i++)
             {
-                revCount+=ARRAY_STEP_SIZE;
+                Count+=ARRAY_STEP_SIZE;
                 for(int j = 0;j < ARRAY_NUM_SIMS; j++)
                 {
-                    for (int k = 0; k < revCount; k++)
+                    for (int k = 0; k < Count; k++)
                     {
-                        innerArray[k] = (int) (revCount - k - 1);
+                        innerArray[k] = (int) (Count - k - 1);
                     }
                     outputArray[j] = innerArray;
                 }
             }
             break;
         case SORTED:
-            unsigned int sortCount = 0;
             for(int i = 0; i < (numSims + 1); i++)
             {
-                sortCount+=ARRAY_STEP_SIZE;
+                Count+=ARRAY_STEP_SIZE;
                 for(int j = 0;j < ARRAY_NUM_SIMS; j++)
                 {
-                    for (int k = 0; k < sortCount; k++)
+                    for (int k = 0; k < Count; k++)
                     {
                         innerArray[k] = k;
                     }
