@@ -134,34 +134,34 @@ void testOneLenArray()
     printResults(onelenTestOperations,oddSolutions, testOutcome);
 }
 
-void testRandArray(int numArray,int numSims,int choice)
+void testRandArray(int numArray,int stepSize,int choice, int numSims)
 {
     // Creating the data
-    vector<vector<vector<int>>> randData;
-    randData = randArray(numSims, numArray);
+    vector<vector<int>> randData;
+    randData = randArrayNew(numArray, stepSize, numSims);
 
     // Storing the data in a csv
     string randInputStr = "testRandInput.csv";
-    createCsv3D(randInputStr, randData);
+    createCsv2D(randInputStr, randData);
 
     // Run the algorithms on the odd length array
     MedianOperationsVector randTestOperations;
     MedianTimeVector randTestExecutionTime;
 
-    for (auto &row : randData) {
-        for(auto &col : row)
-        {
-            randTestOperations.push_back(BruteForceMedianOperations(col));
-            randTestExecutionTime.push_back(BruteForceMedianTime(col));
-        }
+
+    for(auto &row : randData)
+    {
+        randTestOperations.push_back(BruteForceMedianOperations(row));
+        randTestExecutionTime.push_back(BruteForceMedianTime(row));
     }
+
     // Store the results in an output csv
     string randTestStr = "testRandOutput.csv";
     createCsvOutput(randTestStr, randTestOperations, randTestExecutionTime);
 
     // Print the results to the console
     cout << "=======RANDOM ARRAY TEST : Input values=======" << endl;
-    print3D(randData);
+    print2D(randData);
     cout << "\n=======RANDOM ARRAY TEST : Output values=======" << endl;
     printOutput(randTestOperations, randTestExecutionTime, choice);
 }

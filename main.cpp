@@ -33,6 +33,8 @@ int main(int argc, char* argv[])
     cout << "TESTING=0, EXECUTION_TIME=1, OPERATION_COUNT=2" << endl;
     cin >> userInput;
 
+    duration<double> timeTaken;
+    auto startTime = chrono::high_resolution_clock::now();
     switch(userInput) {
         case EVEN_ARRAY:
             cout << "=============TEST 2 : Even Array============" << endl;
@@ -40,11 +42,6 @@ int main(int argc, char* argv[])
             cout << "=============================================\n" << endl;
             break;
         case TESTING:
-            // Needs to include the following tests:
-            // odd array
-            // even array
-            // test median
-            // array length 1
             cout << "=======TEST 1 : Odd Array=======" << endl;
             testOddArray();
             cout << "================================\n" << endl;
@@ -65,18 +62,21 @@ int main(int argc, char* argv[])
             // Tests which need to be included
             cout << "=======TEST 1 : Random array of 100 simulations=======" << endl;
             cout << "===========TEST 1 : EXECUTION TIME TEST===============" << endl;
-            testRandArray(1000, 10, 2);
+            testRandArray(100, 100, 2, 50);
             cout << "======================================================\n" << endl;
             break;
 
         case OPERATION_COUNT:
             cout << "=======TEST 1 : Random array of 100 simulations=======" << endl;
             cout << "===========TEST 1 : OPERATION COUNT TEST==============" << endl;
-            testRandArray(1000, 10, 3);
+            testRandArray(5000, 1, 3, 10);
             cout << "======================================================\n" << endl;
             break;
 
         default:
             return -1;
     }
+    auto endTime = chrono::high_resolution_clock::now();
+    timeTaken = duration_cast<duration<double>>(endTime - startTime);
+    cout <<  "The execution time for the program is: "<< timeTaken.count() << endl;
 }

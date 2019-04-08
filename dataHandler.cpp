@@ -30,6 +30,36 @@ vector<vector<vector<int>>>randArray(int numSims, int numArray)
     return randomVector;
 }
 
+vector<vector<int>> randArrayNew(int numArray, int stepSize, int numSims)
+{
+    // vector<vector<vector<int>>>
+    //  |       |       |
+    //  |       |       +-This is the inner loop and stores all of the random ints
+    //  |       +-This is the numSims (as in the number of the same length array in a simulation)
+    //  +-This is the numArray as in the simulation number for a set of the same length arrays
+
+    // To make a random loop in which we can specify the step size
+    //
+    vector<vector<int> > randomVector;
+
+    int count = 0;
+    int random;
+//    int index = 0;
+    for (int i = 1; i < (numArray + 1); i++) {
+        count += stepSize;
+        for(int j = 0; j < numSims; j++) {
+            vector<int> temp;
+            for (int k = 0; k < count; k++) {
+                random = rand() % 100;
+                temp.push_back(random);
+            }
+            randomVector.push_back(temp);
+        }
+    }
+    return randomVector;
+}
+
+
 vector<vector<int>>oddArray()
 {
     vector<vector<int>> oddLength;
