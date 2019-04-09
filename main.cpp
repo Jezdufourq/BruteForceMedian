@@ -6,25 +6,24 @@
 #include "bruteMedian.cpp"
 #include "generateData.cpp"
 #include "csvGenerator.cpp"
-
-enum TEST_TYPE{
-        ODD = 0,
-        EVEN = 1,
-        LARGE = 2,
-        ONELEN = 3,
-        RANDOM = 4,
-        REVERSED = 5,
-        SORTED = 6,
-};
-
+#include "printConsoleHandler.cpp"
+#include <iomanip>
 
 
 int main()
 {
-    for (int k = TEST_TYPE::ODD; k <= TEST_TYPE::SORTED; k++)
-    {
+//    for (int k = TEST_TYPE::ODD; k <= TEST_TYPE::SORTED; k++)
+//    {
+//        vector<vector<int>> testVect;
+//        testVect = generateArray(10, (TEST_TYPE) k);
+////        createCsv(testVect, (TEST_TYPE) k);
+//        printConsoleInput(testVect, (TEST_TYPE) k);
+//    }
 
-    }
+    vector<vector<int>> testVect;
+    testVect = generateArray(10, RANDOM);
+//        createCsv(testVect, (TEST_TYPE) k);
+    printConsoleInput(testVect, RANDOM);
     return 0;
 }
 

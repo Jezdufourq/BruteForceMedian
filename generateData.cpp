@@ -5,7 +5,7 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
     vector<vector<int>> outputArray;
     vector<int> innerArray;
     unsigned int Count = 0;
-    int random;
+    unsigned int random = 0;
 
     switch (type) {
         case ODD:
@@ -13,9 +13,9 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
             {
                 for (int j = 1; j < (i*2)+2; j++)
                 {
-                    innerArray[j] = j;
+                    innerArray.push_back(j);
                 }
-                outputArray[i] = innerArray;
+                outputArray.push_back(innerArray);
                 innerArray.clear();
             }
             break;
@@ -24,9 +24,9 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
             {
                 for (int j = 1; j < (i*2)+1; j++)
                 {
-                    innerArray[j] = j;
+                    innerArray.push_back(j);
                 }
-                outputArray[i] = innerArray;
+                outputArray.push_back(innerArray);
                 innerArray.clear();
             }
             break;
@@ -35,9 +35,9 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
             {
                 for (int j = 1; j < LARGE_ARRAY_VALUE; j++)
                 {
-                    innerArray[j] = j;
+                    innerArray.push_back(j);
                 }
-                outputArray[i] = innerArray;
+                outputArray.push_back(innerArray);
                 innerArray.clear();
             }
             break;
@@ -46,9 +46,9 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
             {
                 for (int j = 1; j <= 1; j++)
                 {
-                    innerArray[j] = j;
+                    innerArray.push_back(j);
                 }
-                outputArray[i] = innerArray;
+                outputArray.push_back(innerArray);
                 innerArray.clear();
             }
             break;
@@ -61,9 +61,10 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
                     for (int k = 0; k < Count; k++)
                     {
                         random = rand() % RANDOM_RANGE;
-                        innerArray[k] = random;
+                        innerArray.push_back(random);
                     }
-                    outputArray[j] = innerArray;
+                    outputArray.push_back(innerArray);
+                    innerArray.clear();
                 }
             }
             break;
@@ -75,9 +76,10 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
                 {
                     for (int k = 0; k < Count; k++)
                     {
-                        innerArray[k] = (int) (Count - k - 1);
+                        innerArray.push_back((int) ((Count) - k - 1));
                     }
-                    outputArray[j] = innerArray;
+                    outputArray.push_back(innerArray);
+                    innerArray.clear();
                 }
             }
             break;
@@ -89,9 +91,10 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
                 {
                     for (int k = 0; k < Count; k++)
                     {
-                        innerArray[k] = k;
+                        innerArray.push_back(k);
                     }
-                    outputArray[j] = innerArray;
+                    outputArray.push_back(innerArray);
+                    innerArray.clear();
                 }
             }
             break;

@@ -8,26 +8,27 @@ void createCsv(vector<vector<int>> const &input, TEST_TYPE testType)
     switch(testType)
     {
         case ODD:
-            outputFile.open("ODD_TEST_OUTPUT.csv");
+            outputFile.open("ODD_TEST_INPUT.csv");
             break;
         case EVEN:
-            outputFile.open("EVEN_TEST_OUTPUT.csv");
+            outputFile.open("EVEN_TEST_INPUT.csv");
             break;
         case LARGE:
-            outputFile.open("LARGE_TEST_OUTPUT.csv");
+            outputFile.open("LARGE_TEST_INPUT.csv");
             break;
         case ONELEN:
-            outputFile.open("ONELEN_TEST_OUTPUT.csv");
+            outputFile.open("ONELEN_TEST_INPUT.csv");
             break;
         case RANDOM:
-            outputFile.open("RAND_TEST_OUTPUT.csv");
+            outputFile.open("RAND_TEST_INPUT.csv");
             break;
         case REVERSED:
-            outputFile.open("REV_TEST_OUTPUT.csv");
+            outputFile.open("REV_TEST_INPUT.csv");
             break;
         case SORTED:
-            outputFile.open("SORTED_TEST_OUTPUT.csv");
+            outputFile.open("SORTED_TEST_INPUT.csv");
             break;
+        default:break;
     }
     outputFile << "TestNumber, InputArray," << endl;
     int i = 0;
