@@ -1,32 +1,36 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+using namespace std::chrono;
 
-void createCsv(vector<vector<int>> const &input, TEST_TYPE testType)
+void createInputCsv(vector<vector<int>> const &input, TEST_TYPE test)
 {
     ofstream outputFile;
-    switch(testType)
+    switch(test)
     {
+        case NEGATIVE:
+            outputFile.open("INPUT_NEGATIVE_TEST.csv");
+            break;
         case ODD:
-            outputFile.open("ODD_TEST_INPUT.csv");
+            outputFile.open("INPUT_ODD_TEST.csv");
             break;
         case EVEN:
-            outputFile.open("EVEN_TEST_INPUT.csv");
+            outputFile.open("INPUT_EVEN_TEST.csv");
             break;
         case LARGE:
-            outputFile.open("LARGE_TEST_INPUT.csv");
+            outputFile.open("INPUT_LARGE_TEST.csv");
             break;
         case ONELEN:
-            outputFile.open("ONELEN_TEST_INPUT.csv");
+            outputFile.open("INPUT_ONELEN_TEST.csv");
             break;
         case RANDOM:
-            outputFile.open("RAND_TEST_INPUT.csv");
+            outputFile.open("INPUT_RAND_TEST.csv");
             break;
         case REVERSED:
-            outputFile.open("REV_TEST_INPUT.csv");
+            outputFile.open("INPUT_REV_TEST.csv");
             break;
         case SORTED:
-            outputFile.open("SORTED_TEST_INPUT.csv");
+            outputFile.open("INPUT_SORTED_TEST.csv");
             break;
         default:break;
     }
@@ -42,3 +46,109 @@ void createCsv(vector<vector<int>> const &input, TEST_TYPE testType)
     }
     outputFile.close();
 }
+
+void createOutputCsvFunc(vector<int> &arrayLen, vector<double> &algoMedian, vector<double> &actualMedian,TEST_TYPE test)
+{
+    ofstream outputFile;
+    switch(test)
+    {
+        case NEGATIVE:
+            outputFile.open("OUTPUT_NEGATIVE_TEST.csv");
+            break;
+        case ODD:
+            outputFile.open("OUTPUT_ODD_TEST.csv");
+            break;
+        case EVEN:
+            outputFile.open("OUTPUT_EVEN_TEST.csv");
+            break;
+        case LARGE:
+            outputFile.open("OUTPUT_LARGE_TEST.csv");
+            break;
+        case ONELEN:
+            outputFile.open("OUTPUT_ONELEN_TEST.csv");
+            break;
+        case RANDOM:return;
+        case REVERSED:return;
+        case SORTED:return;
+    }
+    outputFile << "TestNumber, InputArrayLength, AlgoMedianValue, CalculatedMedianValue, PASS/FAIL" << endl;
+    for (int i = 0; i < algoMedian.size(); i++)
+    {
+        outputFile << i << ",";
+        outputFile << arrayLen[i] << ",";
+        outputFile << algoMedian[i] << ",";
+        outputFile << actualMedian[i] << ",";
+        if(algoMedian[i]==actualMedian[i])
+        {
+            outputFile <<  "PASS" << endl;
+        }else if (algoMedian[i]!=actualMedian[i]){
+            outputFile << "FAIL" << endl;
+        }
+    }
+    outputFile.close();
+}
+
+void createOutputCsvOps(vector<int> &arrayLen, vector<double> &algoMedian, vector<unsigned long long> &numOps,TEST_TYPE test)
+{
+    ofstream outputFile;
+    switch(test)
+    {
+        case NEGATIVE:return;
+        case ODD:return;
+        case EVEN:return;
+        case LARGE:return;
+        case ONELEN:return;
+        case RANDOM:
+            outputFile.open("OUTPUT_RANDOM_OPS_TEST.csv");
+            break;
+        case REVERSED:
+            outputFile.open("OUTPUT_REVERSED_OPS_TEST.csv");
+            break;
+        case SORTED:
+            outputFile.open("OUTPUT_SORTED_OPS_TEST.csv");
+            break;
+        default:return;
+    }
+    outputFile << "TestNumber, InputArrayLength, AlgoMedianValue, NumberOfOperations" << endl;
+    for (int i = 0; i < algoMedian.size(); i++)
+    {
+        outputFile << i << ",";
+        outputFile << arrayLen[i] << ",";
+        outputFile << algoMedian[i] << ",";
+        outputFile << numOps[i] << endl;
+    }
+    outputFile.close();
+}
+
+void createOutputCsvTiming(vector<int> &arrayLen, vector<double> &algoMedian, vector<double> &execTime,TEST_TYPE test)
+{
+    ofstream outputFile;
+    switch(test)
+    {
+        case NEGATIVE:return;
+        case ODD:return;
+        case EVEN:return;
+        case LARGE:return;
+        case ONELEN:return;
+        case RANDOM:
+            outputFile.open("OUTPUT_RANDOM_TIME_TEST.csv");
+            break;
+        case REVERSED:
+            outputFile.open("OUTPUT_REVERSED_TIME_TEST.csv");
+            break;
+        case SORTED:
+            outputFile.open("OUTPUT_SORTED_TIME_TEST.csv");
+            break;
+        default:return;
+    }
+    outputFile << "TestNumber, InputArrayLength, AlgoMedianValue, ExecutionTime" << endl;
+    for (int i = 0; i < algoMedian.size(); i++)
+    {
+        outputFile << i << ",";
+        outputFile << arrayLen[i] << ",";
+        outputFile << algoMedian[i] << ",";
+        outputFile << execTime[i] << endl;
+    }
+    outputFile.close();
+}
+

@@ -8,6 +8,17 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
     unsigned int random = 0;
 
     switch (type) {
+        case NEGATIVE:
+            for (int i = 0; i < numSims; i++)
+            {
+                for (int j = 0; j >= -((int) numSims); j--)
+                {
+                    innerArray.push_back(j);
+                }
+                outputArray.push_back(innerArray);
+                innerArray.clear();
+            }
+            break;
         case ODD:
             for (int i = 0; i < numSims; i++)
             {
@@ -53,7 +64,7 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
             }
             break;
         case RANDOM:
-            for(int i = 0; i < (numSims + 1); i++)
+            for(int i = 0; i < (numSims); i++)
             {
                 Count+=ARRAY_STEP_SIZE;
                 for(int j = 0;j < ARRAY_NUM_SIMS; j++)
@@ -98,6 +109,7 @@ vector<vector<int>> generateArray(unsigned long numSims, TEST_TYPE type) {
                 }
             }
             break;
+
     }
     return outputArray;
 }

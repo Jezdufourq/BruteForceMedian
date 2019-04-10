@@ -2,10 +2,11 @@
 #include <iostream>
 using namespace std;
 
-tuple<int, long long int> BruteForceMedian(vector<int> &input) {
+unsigned long long numOp = 0;
+
+double BruteForceMedian(vector<int> &input) {
     // Calculate the half-way index of the array.
     int k = (int) ceil(input.size() / 2.0);
-    long long int numOp = 0;
 
     for (int i = 0; i < input.size(); i++) {
         int numSmaller = 0; // Number of elements smaller than input[i];
@@ -15,23 +16,15 @@ tuple<int, long long int> BruteForceMedian(vector<int> &input) {
             // Calculate number of array items that are smaller, and equal.
             if (input[j] < input[i]) {
                 numSmaller++;
-                numOp += 1;
-            } else {
-                if (input[j] == input[i]) {
-                    numEqual++;
-                    numOp += 2;
-                }
+                numOp++;
+            } else if (input[j] == input[i]) {
+                numEqual++;
+                numOp++;
             }
         }
-/*
-            else {
-                numOp += 2; // None matched, add 2.
-            }*/
-//        numOp += 2;
-
         if (numSmaller < k && k <= (numSmaller + numEqual)) {
-            return make_tuple(input[i], numOp);
+            return input[i];
         }
     }
-    return tuple<int, long long int>();
+    return 0;
 }

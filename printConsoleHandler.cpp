@@ -1,33 +1,39 @@
 using namespace std;
+using namespace std::chrono;
 #include <iomanip>
 
 void printConsoleInput(vector<vector<int>> const &input, TEST_TYPE test)
 {
+    setfill('=');
     switch(test)
     {
+        case NEGATIVE:
+            cout << "==NEGATIVE TEST INPUT==" << endl;
+            break;
         case ODD:
-            cout << setfill('=') << setw(20) << "ODD TEST INPUT" << setw(20) << endl;
+            cout << "==ODD TEST INPUT==" << endl;
             break;
         case EVEN:
-            cout << setfill('=') << setw(20) << "EVEN TEST INPUT" << setw(20) << endl;
+            cout << "==EVEN TEST INPUT==" << endl;
             break;
         case LARGE:
-            cout << setfill('=') << setw(20) << "LARGE TEST INPUT" << setw(20) << endl;
+            cout << "==LARGE TEST INPUT==" << endl;
             break;
         case ONELEN:
-            cout << setfill('=') << setw(20) << "ONELENGTH TEST INPUT" << setw(20) << endl;
+            cout <<  "==ONELENGTH TEST INPUT==" << endl;
             break;
         case RANDOM:
-            cout << setfill('=') << setw(20) << "RANDOM TEST INPUT" << setw(20) << endl;
+            cout << "==RANDOM TEST INPUT==" << endl;
             break;
         case REVERSED:
-            cout << setfill('=') << setw(20) << "REVERSED TEST INPUT" << setw(20) << endl;
+            cout << "==REVERSED TEST INPUT==" << endl;
             break;
         case SORTED:
-            cout << setfill('=') << setw(20) << "SORTED TEST INPUT" << setw(20) << endl;
+            cout << "==SORTED TEST INPUT==" << endl;
             break;
         default:break;
     }
+    cout << setfill('=')<< endl;
 
     //TODO: Fix up the comma issue at the end of the input array when printing to the console.
     int i = 0;
@@ -43,4 +49,55 @@ void printConsoleInput(vector<vector<int>> const &input, TEST_TYPE test)
         cout << "}" << endl;
     }
 }
+
+void printConsoleFunctionality(vector<double> &actual, vector<double> &algo, vector<int> &arrayLength)
+{
+    cout << "| TestNumber | ArrayLength | AlgoMedianValue | CalculatedMedianValue | PASS/FAIL |"<< endl;
+    cout << "|------------|-------------|-----------------|-----------------------|-----------|"<< endl;
+
+    for (int i = 0; i < actual.size(); i++)
+    {
+        cout << "| " << i <<setw(12);
+        cout << " | " << arrayLength[i] <<setw(13);
+        cout << " | " << algo[i]  <<setw(16);
+        cout << " | " << actual[i] << setw(24);
+        if(algo[i]==actual[i])
+        {
+            cout << " | " << "PASS" << endl;
+        }else if (algo[i]!=actual[i]){
+            cout << " | " << "FAIL" << endl;
+        }
+    }
+}
+
+void printConsoleOperations(vector<unsigned long long> &numOps, vector<double> &algo, vector<int> &arrayLength)
+{
+    cout << "| TestNumber | ArrayLength | AlgoMedianValue | NumberOfOperations |"<< endl;
+    cout << "|------------|-------------|-----------------|--------------------|"<< endl;
+
+    for (int i = 0; i < algo.size(); i++)
+    {
+        cout << "| " << i <<setw(12);
+        cout << " | " << arrayLength[i] <<setw(13);
+        cout << " | " << algo[i]  <<setw(16);
+        cout << " | " << numOps[i] << setw(24) << endl;
+    }
+}
+
+void printConsoleTiming(vector<double> &execTime, vector<double> &algo, vector<int> &arrayLength)
+{
+    cout << "| TestNumber | ArrayLength | AlgoMedianValue | ExecutionTime |"<< endl;
+    cout << "|------------|-------------|-----------------|---------------|"<< endl;
+
+    for (int i = 0; i < algo.size(); i++)
+    {
+        cout << "| " << i << setw(12);
+        cout << " | " << arrayLength[i] <<setw(11);
+        cout << " | " << algo[i]  <<setw(11);
+        cout << " | " << execTime[i] << setw(21) << endl;
+    }
+}
+
+
+
 
