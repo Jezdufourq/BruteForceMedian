@@ -1,23 +1,17 @@
-using namespace std::chrono;
-
+#include "headerFile.h"
 
 void runTests(TEST_TYPE test,  PROGRAM_TYPE program)
 {
     // Defining the input and the output vector
     vector<vector<int>> inputVector;
-    vector<double> algoMedianVector;
-    vector<double> actualMedianVector;
+    vector<int> algoMedianVector;
+    vector<int> actualMedianVector;
     vector<unsigned long long> numOpsVector;
     vector<double> execTimeVector;
     vector<int> arrayLength;
-    clock_t startTime, endTime;
-    std::chrono::steady_clock::time_point begin;
-    std::chrono::steady_clock::time_point end;
-
-
 
     // Creating the input vector
-    inputVector = generateArray(SIMULATIONS, test);
+    inputVector = generateArray(test);
     createInputCsv(inputVector, test);
 
     for (int i = 0; i < inputVector.size(); i++)
@@ -59,28 +53,22 @@ void runTests(TEST_TYPE test,  PROGRAM_TYPE program)
             printConsoleOperations(numOpsVector, algoMedianVector, arrayLength);
             // Saving the results to a csv file
             createOutputCsvOps(arrayLength, algoMedianVector, numOpsVector, test);
+            numOp = 0; // Resetting the number of operations
             break;
         case TIMING:
             for (auto &col : inputVector)
             {
-                cout << "TestArraySize: "<< col.size() << endl;
-                begin = std::chrono::steady_clock::now();
-                algoMedianVector.push_back(BruteForceMedianTime(col));
 
-                end= std::chrono::steady_clock::now();
-                double elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count();
-                execTimeVector.push_back(elapsed);
+                high_resolution_clock::time_point t1 = high_resolution_clock::now();
+                int output = BruteForceMedianTime(col);
+                high_resolution_clock::time_point t2 = high_resolution_clock::now();
+                auto nanoseconds = std::chrono::duration_cast<std::chrono::nanoseconds>(t2-t1);
+                execTimeVector.push_back(nanoseconds.count());
+                algoMedianVector.push_back(output);
             }
-
-//                Count+=ARRAY_STEP_SIZE;
-//                for (int j =0; j < ARRAY_NUM_SIMS; j++)
-//                {
-//                    algoMedianVector.push_back(BruteForceMedianTime(inputVector[j]));
-//                    execTimeVector.push_back(execTime);
             cout << "========TIMING TESTING RESULTS========" << endl;
             cout << "=====THIS IS THE TEST (" << test << ")=====" << endl;
-            cout << inputVector.size() << endl;
-//            printConsoleTiming(execTimeVector,algoMedianVector,arrayLength);
+            printConsoleTiming(execTimeVector,algoMedianVector,arrayLength);
             // Saving the results to a csv file
             createOutputCsvTiming(arrayLength, algoMedianVector, execTimeVector, test);
             break;

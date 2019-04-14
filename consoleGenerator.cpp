@@ -1,6 +1,4 @@
-using namespace std;
-using namespace std::chrono;
-#include <iomanip>
+#include "headerFile.h"
 
 void printConsoleInput(vector<vector<int>> const &input, TEST_TYPE test)
 {
@@ -50,7 +48,7 @@ void printConsoleInput(vector<vector<int>> const &input, TEST_TYPE test)
     }
 }
 
-void printConsoleFunctionality(vector<double> &actual, vector<double> &algo, vector<int> &arrayLength)
+void printConsoleFunctionality(vector<int> &actual, vector<int> &algo, vector<int> &arrayLength)
 {
     cout << "| TestNumber | ArrayLength | AlgoMedianValue | CalculatedMedianValue | PASS/FAIL |"<< endl;
     cout << "|------------|-------------|-----------------|-----------------------|-----------|"<< endl;
@@ -70,7 +68,7 @@ void printConsoleFunctionality(vector<double> &actual, vector<double> &algo, vec
     }
 }
 
-void printConsoleOperations(vector<unsigned long long> &numOps, vector<double> &algo, vector<int> &arrayLength)
+void printConsoleOperations(vector<unsigned long long> &numOps, vector<int> &algo, vector<int> &arrayLength)
 {
     cout << "| TestNumber | ArrayLength | AlgoMedianValue | NumberOfOperations |"<< endl;
     cout << "|------------|-------------|-----------------|--------------------|"<< endl;
@@ -84,7 +82,7 @@ void printConsoleOperations(vector<unsigned long long> &numOps, vector<double> &
     }
 }
 
-void printConsoleTiming(vector<double> &execTime, vector<double> &algo, vector<int> &arrayLength)
+void printConsoleTiming(vector<double> &execTime, vector<int> &algo, vector<int> &arrayLength)
 {
     cout << "| TestNumber | ArrayLength | AlgoMedianValue | ExecutionTime |"<< endl;
     cout << "|------------|-------------|-----------------|---------------|"<< endl;

@@ -1,7 +1,4 @@
-#include <iostream>
-#include <fstream>
-using namespace std;
-using namespace std::chrono;
+#include "headerFile.h"
 
 void createInputCsv(vector<vector<int>> const &input, TEST_TYPE test)
 {
@@ -23,6 +20,7 @@ void createInputCsv(vector<vector<int>> const &input, TEST_TYPE test)
         case ONELEN:
             outputFile.open("INPUT_ONELEN_TEST.csv");
             break;
+        case NOLEN:return;
         case RANDOM:
             outputFile.open("INPUT_RAND_TEST.csv");
             break;
@@ -47,29 +45,38 @@ void createInputCsv(vector<vector<int>> const &input, TEST_TYPE test)
     outputFile.close();
 }
 
-void createOutputCsvFunc(vector<int> &arrayLen, vector<double> &algoMedian, vector<double> &actualMedian,TEST_TYPE test)
+void createOutputCsvFunc(vector<int> &arrayLen, vector<int> &algoMedian, vector<int> &actualMedian,TEST_TYPE test)
 {
     ofstream outputFile;
     switch(test)
     {
         case NEGATIVE:
-            outputFile.open("OUTPUT_NEGATIVE_TEST.csv");
+            outputFile.open("OUTPUT_NEGATIVE_FUNC_TEST.csv");
             break;
         case ODD:
-            outputFile.open("OUTPUT_ODD_TEST.csv");
+            outputFile.open("OUTPUT_ODD_FUNC_TEST.csv");
             break;
         case EVEN:
-            outputFile.open("OUTPUT_EVEN_TEST.csv");
+            outputFile.open("OUTPUT_EVEN_FUNC_TEST.csv");
             break;
         case LARGE:
-            outputFile.open("OUTPUT_LARGE_TEST.csv");
+            outputFile.open("OUTPUT_LARGE_FUNC_TEST.csv");
             break;
         case ONELEN:
-            outputFile.open("OUTPUT_ONELEN_TEST.csv");
+            outputFile.open("OUTPUT_ONELEN_FUNC_TEST.csv");
             break;
-        case RANDOM:return;
-        case REVERSED:return;
-        case SORTED:return;
+        case NOLEN:
+            outputFile.open("OUTPUT_NOLEN_FUNC_TEST.csv");
+            break;
+        case RANDOM:
+            outputFile.open("OUTPUT_RANDOM_FUNC_TEST.csv");
+            break;
+        case REVERSED:
+            outputFile.open("OUTPUT_REVERSED_FUNC_TEST.csv");
+            break;
+        case SORTED:
+            outputFile.open("OUTPUT_SORTED_FUNC_TEST.csv");
+            break;
     }
     outputFile << "TestNumber, InputArrayLength, AlgoMedianValue, CalculatedMedianValue, PASS/FAIL" << endl;
     for (int i = 0; i < algoMedian.size(); i++)
@@ -88,7 +95,7 @@ void createOutputCsvFunc(vector<int> &arrayLen, vector<double> &algoMedian, vect
     outputFile.close();
 }
 
-void createOutputCsvOps(vector<int> &arrayLen, vector<double> &algoMedian, vector<unsigned long long> &numOps,TEST_TYPE test)
+void createOutputCsvOps(vector<int> &arrayLen, vector<int> &algoMedian, vector<unsigned long long> &numOps,TEST_TYPE test)
 {
     ofstream outputFile;
     switch(test)
@@ -98,6 +105,7 @@ void createOutputCsvOps(vector<int> &arrayLen, vector<double> &algoMedian, vecto
         case EVEN:return;
         case LARGE:return;
         case ONELEN:return;
+        case NOLEN:return;
         case RANDOM:
             outputFile.open("OUTPUT_RANDOM_OPS_TEST.csv");
             break;
@@ -120,7 +128,7 @@ void createOutputCsvOps(vector<int> &arrayLen, vector<double> &algoMedian, vecto
     outputFile.close();
 }
 
-void createOutputCsvTiming(vector<int> &arrayLen, vector<double> &algoMedian, vector<double> &execTime,TEST_TYPE test)
+void createOutputCsvTiming(vector<int> &arrayLen, vector<int> &algoMedian, vector<double> &execTime,TEST_TYPE test)
 {
     ofstream outputFile;
     switch(test)
@@ -130,6 +138,7 @@ void createOutputCsvTiming(vector<int> &arrayLen, vector<double> &algoMedian, ve
         case EVEN:return;
         case LARGE:return;
         case ONELEN:return;
+        case NOLEN:return;
         case RANDOM:
             outputFile.open("OUTPUT_RANDOM_TIME_TEST.csv");
             break;
